@@ -9,6 +9,7 @@ public class PlayerJump : MonoBehaviour
     public float JumpForce;
     public Transform GroundCheckTransform;
     public LayerMask GroundLayers;
+    public bool EnforceGroundCheck = true;
 
     private float groundCheckRadius = 0.5f;
     private Rigidbody2D rb;
@@ -19,6 +20,12 @@ public class PlayerJump : MonoBehaviour
     }
     public bool IsGrounded()
     {
+        if (EnforceGroundCheck == false)
+        {
+            return true;
+        }
+
+        // Check to see if we're on the ground
         Collider2D groundCheck = Physics2D.OverlapCircle(GroundCheckTransform.position, groundCheckRadius, GroundLayers);
 
         if (groundCheck != null)

@@ -11,6 +11,7 @@ namespace Assets.Scripts.Terrain
         public int FillPercentage;
         public int Width;
         public int Height;
+        public int SmoothingPasses;
 
         [Header("Map Seed:")]
         public string Seed;
@@ -37,7 +38,7 @@ namespace Assets.Scripts.Terrain
                 Seed = Time.time.ToString();
             }
 
-            // Grab a sudo random
+            // Grab a sudo random seed using our supplied (or generated seed)
             System.Random pseudoRandomSeed = new System.Random(Seed.GetHashCode());
 
             // Loop our x - IE the map width
@@ -49,12 +50,14 @@ namespace Assets.Scripts.Terrain
                     // Check if this is a border tile
                     if (x == 0 || x == Width - 1 || y == 0 || y == Height - 1)
                     {
-                        // Generate a number beween 0-100, if less than fill percentage it should be a solid tile, more than and it should be empty
+                        // Force fill the borders
                         map[x, y] = 1;
                     }
-
-                    // Generate a number beween 0-100, if less than fill percentage it should be a solid tile, more than and it should be empty
-                    map[x, y] = pseudoRandomSeed.Next(0, 100) < FillPercentage ? 1 : 0;
+                    else
+                    {
+                        // Generate a number beween 0-100, if less than fill percentage it should be a solid tile, more than and it should be empty
+                        map[x, y] = pseudoRandomSeed.Next(0, 100) < FillPercentage ? 1 : 0;
+                    }
                 }
             }
         }
@@ -124,10 +127,10 @@ namespace Assets.Scripts.Terrain
             tilemap.ClearAllTiles();
 
             //Loop through the width of the map
-            for (int x = 0; x < map.GetUpperBound(0); x++)
+            for (int x = 0; x < Width; x++)
             {
                 //Loop through the height of the map
-                for (int y = 0; y < map.GetUpperBound(1); y++)
+                for (int y = 0; y < Height; y++)
                 {
                     // 1 = tile, 0 = no tile
                     if (map[x, y] == 1)
@@ -171,7 +174,7 @@ namespace Assets.Scripts.Terrain
         {
             GenerateMap();
             RandomFillMap();
-            SmoothMap(5);
+            //SmoothMap(SmoothingPasses);
             RenderMap(map, TerrainTilemap, TerrainTile);
         }
     }

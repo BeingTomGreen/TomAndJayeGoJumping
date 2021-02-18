@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 98027453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 562386628}
   m_Father: {fileID: 0}
@@ -346,6 +346,7 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 256
+  EnforceGroundCheck: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,10 +615,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FillPercentage: 53
-  Width: 512
-  Height: 256
-  Seed: 
-  UseRandomSeed: 1
+  Width: 256
+  Height: 128
+  SmoothingPasses: 0
+  Seed: test
+  UseRandomSeed: 0
   DrawGizmos: 0
   TerrainTilemap: {fileID: 1402785544}
   TerrainTile: {fileID: 11400000, guid: 7b290d49b57f82647846e0940642ab9e, type: 2}

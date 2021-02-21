@@ -33,6 +33,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Debug: Regenerate Terrain"",
+                    ""type"": ""Button"",
+                    ""id"": ""41b2bf1f-1f70-49a8-8abc-33d445f2d953"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -178,6 +186,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""2328e884-285f-477e-a7e5-124f59bfd100"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug: Regenerate Terrain"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""31e4c0c2-7354-475d-9699-ef834ec4859a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug: Regenerate Terrain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""a1c0ff24-770c-469b-853b-fed6bb5a8119"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug: Regenerate Terrain"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -188,6 +229,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Jump = m_PlayerMovement.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
+        m_PlayerMovement_DebugRegenerateTerrain = m_PlayerMovement.FindAction("Debug: Regenerate Terrain", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -239,12 +281,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
     private readonly InputAction m_PlayerMovement_Jump;
     private readonly InputAction m_PlayerMovement_Move;
+    private readonly InputAction m_PlayerMovement_DebugRegenerateTerrain;
     public struct PlayerMovementActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_PlayerMovement_Jump;
         public InputAction @Move => m_Wrapper.m_PlayerMovement_Move;
+        public InputAction @DebugRegenerateTerrain => m_Wrapper.m_PlayerMovement_DebugRegenerateTerrain;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,6 +304,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnMove;
+                @DebugRegenerateTerrain.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDebugRegenerateTerrain;
+                @DebugRegenerateTerrain.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDebugRegenerateTerrain;
+                @DebugRegenerateTerrain.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnDebugRegenerateTerrain;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -270,6 +317,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @DebugRegenerateTerrain.started += instance.OnDebugRegenerateTerrain;
+                @DebugRegenerateTerrain.performed += instance.OnDebugRegenerateTerrain;
+                @DebugRegenerateTerrain.canceled += instance.OnDebugRegenerateTerrain;
             }
         }
     }
@@ -278,5 +328,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+        void OnDebugRegenerateTerrain(InputAction.CallbackContext context);
     }
 }

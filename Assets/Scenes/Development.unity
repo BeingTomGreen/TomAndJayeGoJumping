@@ -158,7 +158,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.005
-  m_GravityScale: 2.5
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -324,6 +324,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4e64e8b2-9658-442d-a646-8e8bc0149dcf
     m_ActionName: PlayerMovement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1153710863}
+        m_MethodName: Generate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 41b2bf1f-1f70-49a8-8abc-33d445f2d953
+    m_ActionName: 'PlayerMovement/Debug: Regenerate Terrain[/Keyboard/ctrl,/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -441,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -614,13 +629,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6307df2ddd95d140bbfc496d21d5b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FillPercentage: 53
-  Width: 256
-  Height: 128
-  SmoothingPasses: 0
+  FillPercentage: 46
+  Width: 128
+  Height: 64
+  SmoothingPasses: 4
   Seed: test
   UseRandomSeed: 0
-  DrawGizmos: 0
+  DrawGizmos: 1
   TerrainTilemap: {fileID: 1402785544}
   TerrainTile: {fileID: 11400000, guid: 7b290d49b57f82647846e0940642ab9e, type: 2}
 --- !u!4 &1153710864

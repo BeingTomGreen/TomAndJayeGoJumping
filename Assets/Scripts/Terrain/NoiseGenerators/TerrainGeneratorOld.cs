@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Terrain.NoiseGenerators;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,7 +11,7 @@ namespace Assets.Scripts.Terrain
         int[,] mapArray;
         private Tilemap tilemap;
 
-        public NoiseGenerator noiseGenerator;
+        public NoiseMapGenerator noiseGenerator;
 
         public TileBase tile;
 
@@ -188,22 +189,31 @@ namespace Assets.Scripts.Terrain
             return map;
 
         }
+
+        //void Start()
+        //{
+        //    TerrainTilemap = transform.parent.GetComponent<Tilemap>();
+        //    availablePlaces = new List<Vector3>();
+
+        //    for (int n = TerrainTilemap.cellBounds.xMin; n < TerrainTilemap.cellBounds.xMax; n++)
+        //    {
+        //        for (int p = TerrainTilemap.cellBounds.yMin; p < TerrainTilemap.cellBounds.yMax; p++)
+        //        {
+        //            Vector3Int localPlace = new Vector3Int(n, p, (int)TerrainTilemap.transform.position.y);
+        //            Vector3 place = TerrainTilemap.CellToWorld(localPlace);
+        //            if (TerrainTilemap.HasTile(localPlace))
+        //            {
+        //                //Tile at "place"
+        //                availablePlaces.Add(place);
+        //            }
+        //            else
+        //            {
+        //                //No tile at "place"
+        //            }
+        //        }
+        //    }
+        //}
+
     }
 
-    public class NoiseGenerator
-    {
-
-    }
-
-    public class PerlinNoiseGenerator : NoiseGenerator
-    {
-        public static int[,] Generate()
-        {
-            int[,] x = new int[2, 2];
-
-            return x;
-        }
-
-
-    }
 }
